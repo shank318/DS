@@ -431,5 +431,9 @@ lastOcc(Array a, size n, search_value s){
      return ressult;
 }
 ```
+### How many times array is rotated
+
+<img width="575" alt="screen shot 2018-09-16 at 5 58 35 pm" src="https://user-images.githubusercontent.com/5608772/45596489-3354ba80-b9da-11e8-88e5-c8f8f66dc3fe.png">
+
 
 
