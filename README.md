@@ -260,6 +260,6 @@ public String countAndSay(int n) {
 
 ### Decode message
 
-![img](https://imgur.com/Q5aghEB)
+<img width="964"src="https://user-images.githubusercontent.com/5608772/45596270-35694a00-b9d7-11e8-820d-08ee823dfa31.png">
 
 http://www.youtube.com/watch?v=qli-JCrSwuk
