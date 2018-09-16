@@ -518,5 +518,6 @@ void Insert(int data, int n)
 ## Reverse a linked list - Iterative method
 
 
+<img width="447" alt="screen shot 2018-09-16 at 11 04 18 pm" src="https://user-images.githubusercontent.com/5608772/45599195-ecc88580-ba04-11e8-8e01-c2b7b58c3279.png">
 
 
