@@ -254,12 +254,182 @@ public String countAndSay(int n) {
 
 ### Binary search Tree(Insert and search)
 
-[![](http://img.youtube.com/vi/COZK7NATh4k/0.jpg)](http://www.youtube.com/watch?v=COZK7NATh4k "Binary Search")
+```
+// Function to create a new Node in heap
+BstNode* GetNewNode(int data) {
+	BstNode* newNode = new BstNode();
+	newNode->data = data;
+	newNode->left = newNode->right = NULL;
+	return newNode;
+}
 
-[![](http://img.youtube.com/vi/9RHO6jU--GU/0.jpg)](http://www.youtube.com/watch?v=9RHO6jU--GU "Binary Search")
+// To insert data in BST, returns address of root node 
+BstNode* Insert(BstNode* root,int data) {
+	if(root == NULL) { // empty tree
+		root = GetNewNode(data);
+	}
+	// if data to be inserted is lesser, insert in left subtree. 
+	else if(data <= root->data) {
+		root->left = Insert(root->left,data);
+	}
+	// else, insert in right subtree. 
+	else {
+		root->right = Insert(root->right,data);
+	}
+	return root;
+}
+//To search an element in BST, returns true if element is found
+bool Search(BstNode* root,int data) {
+	if(root == NULL) {
+		return false;
+	}
+	else if(root->data == data) {
+		return true;
+	}
+	else if(data <= root->data) {
+		return Search(root->left,data);
+	}
+	else {
+		return Search(root->right,data);
+	}
+}
+int main() {
+	BstNode* root = NULL;  // Creating an empty tree
+	/*Code to test the logic*/
+	root = Insert(root,15);	
+	root = Insert(root,10);	
+	root = Insert(root,20);
+	root = Insert(root,25);
+	root = Insert(root,8);
+	root = Insert(root,12);
+	// Ask user to enter a number.  
+	int number;
+	cout<<"Enter number be searched\n";
+	cin>>number;
+	//If number is found, print "FOUND"
+	if(Search(root,number) == true) cout<<"Found\n";
+	else cout<<"Not Found\n";
+}
+```
+
+### Binary tree BFS and DFS
+
+```
+void LevelOrder(Node *root) {
+	if(root == NULL) return;
+	queue<Node*> Q;
+	Q.push(root);  
+	//while there is at least one discovered node
+	while(!Q.empty()) {
+		Node* current = Q.front();
+		Q.pop(); // removing the element at front
+		cout<<current->data<<" ";
+		if(current->left != NULL) Q.push(current->left);
+		if(current->right != NULL) Q.push(current->right);
+	}
+}
+
+//Function to visit nodes in Preorder
+void Preorder(struct Node *root) {
+	// base condition for recursion
+	// if tree/sub-tree is empty, return and exit
+	if(root == NULL) return;
+
+	printf("%c ",root->data); // Print data
+	Preorder(root->left);     // Visit left subtree
+	Preorder(root->right);    // Visit right subtree
+}
+
+//Function to visit nodes in Inorder
+void Inorder(Node *root) {
+	if(root == NULL) return;
+
+	Inorder(root->left);       //Visit left subtree
+	printf("%c ",root->data);  //Print data
+	Inorder(root->right);      // Visit right subtree
+}
+
+//Function to visit nodes in Postorder
+void Postorder(Node *root) {
+	if(root == NULL) return;
+
+	Postorder(root->left);    // Visit left subtree
+	Postorder(root->right);   // Visit right subtree
+	printf("%c ",root->data); // Print data
+}
+
+
+```
 
 ### Decode message
 
 <img width="964" src="https://user-images.githubusercontent.com/5608772/45596270-35694a00-b9d7-11e8-820d-08ee823dfa31.png">
 
 http://www.youtube.com/watch?v=qli-JCrSwuk
+
+### Binary search
+
+```
+   int binarySearch(int arr[], int x) 
+    { 
+        int l = 0, r = arr.length - 1; 
+        while (l <= r) 
+        { 
+            int m = l + (r-l)/2; 
+  
+            // Check if x is present at mid 
+            if (arr[m] == x) 
+                return m; 
+  
+            // If x greater, ignore left half 
+            if (arr[m] < x) 
+                l = m + 1; 
+  
+            // If x is smaller, ignore right half 
+            else
+                r = m - 1; 
+        } 
+  
+        // if we reach here, then element was  
+        // not present 
+        return -1; 
+    }
+```
+
+### First and last occurence of a number in an array
+
+```
+FirstOcc(Array a, size n, search_value s){
+	low=0;
+	high=n-1;
+        result=-1
+	while(low<=high){
+		mid=(low+high)/2;
+		if(a[mid]<s)
+		  	 low=mid+1;
+		else if(a[mid]>s) 
+			high=mid-1; 
+		else if(a[mid]==s) {
+		 	result=mid; high=mid-1;}
+	}
+	return result; 
+}
+
+lastOcc(Array a, size n, search_value s){
+	low=0;
+	high=n-1;
+        result=-1
+	while(low<=high){
+		mid=(low+high)/2;
+		if(a[mid]<s)
+		   low=mid+1;
+		else if(a[mid]>s)
+		    high=mid-1;
+		else if(a[mid]==s)
+		 { result=mid; low=mid+1;}
+	}
+     return ressult;
+}
+```
+
+
