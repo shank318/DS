@@ -260,4 +260,6 @@ public String countAndSay(int n) {
 
 ### Decode message
 
-[![](http://img.youtube.com/vi/qli-JCrSwuk/0.jpg)](http://www.youtube.com/watch?v=qli-JCrSwuk "Binary Search")
+![img](https://imgur.com/Q5aghEB)
+
+http://www.youtube.com/watch?v=qli-JCrSwuk
