@@ -439,5 +439,26 @@ lastOcc(Array a, size n, search_value s){
 
 <img width="576" alt="screen shot 2018-09-16 at 6 15 45 pm" src="https://user-images.githubusercontent.com/5608772/45596644-97787e00-b9dc-11e8-9c50-f0cc5e8f9522.png">
 
+### Knapsack solution
+
+```
+W = [2,3,4,5]
+V= [1,3,2,9]
+int[n][c] memo= null;
+void KS(n,c){
+  int result =0;
+  if(memo[n][v]!=null) return memo[n][v];
+  if(n==0 || c==0) result= 0;
+  else if(w[n]>c) result = KS(n-1,c); 
+  else{
+    temp1 = KS(n-1,c);
+    temp2 = v[n]+ KS(n-1,w[n]-c);
+    result = Max(temp1,temp2);
+  }
+  memo[n][c] = result;
+  return result;
+}
+```
+
 
 
