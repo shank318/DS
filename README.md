@@ -626,6 +626,7 @@ int EvaluatePostfix(string expression)
 
 ## Fence painting
 
+```
 int paintFence(int n, int k){
 if(n==0) return 0;
 if(n==1) return k;
@@ -639,6 +640,6 @@ for(int i=2;i<=n;i++){
   dp[i] = same +diff;
 }
 return dp[n];
-
 }
+```
 
