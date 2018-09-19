@@ -622,5 +622,23 @@ int EvaluatePostfix(string expression)
 
 ## Graph Coloring
 
+<img width="949" alt="screen shot 2018-09-19 at 9 47 29 pm" src="https://user-images.githubusercontent.com/5608772/45766662-bdf51e00-bc55-11e8-9b94-3e959c5684f9.png">
 
+## Fence painting
+
+int paintFence(int n, int k){
+if(n==0) return 0;
+if(n==1) return k;
+int[] dp = new int[n];
+dp[1] = k;
+int same = 0;
+int diff = k;
+for(int i=2;i<=n;i++){
+  same = diff;
+  diff = dp[i-1]*(k-1) // 
+  dp[i] = same +diff;
+}
+return dp[n];
+
+}
 
