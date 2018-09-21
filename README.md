@@ -474,6 +474,18 @@ for(int i=0;i<len/2;i++,len--){
 }
 ```
 
+```
+public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+```
+
 ## Check if a string is pallindrome
 
 ```
@@ -642,4 +654,36 @@ for(int i=2;i<=n;i++){
 return dp[n];
 }
 ```
+
+### Rotate an array right
+
+```
+public class Solution {
+    public void rotate(int[] nums, int k) {
+        k %= nums.length;
+        reverse(nums, 0, nums.length - 1);
+        reverse(nums, 0, k - 1);
+        reverse(nums, k, nums.length - 1);
+    }
+    public void reverse(int[] nums, int start, int end) {
+        while (start < end) {
+            int temp = nums[start];
+            nums[start] = nums[end];
+            nums[end] = temp;
+            start++;
+            end--;
+        }
+    }
+}
+```
+
+## Rotate an array left
+
+```
+rotate(arr[], d, n)
+  reverse(arr[], 1, d) ;
+  reverse(arr[], d + 1, n);
+  reverse(arr[], 1, n);
+```
+
 
