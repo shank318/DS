@@ -686,4 +686,83 @@ rotate(arr[], d, n)
   reverse(arr[], 1, n);
 ```
 
+## Local Minima
 
+```
+ public static int localMinUtil(int[] arr, int low, 
+                                   int high, int n)
+    {
+         
+        // Find index of middle element
+        int mid = low + (high - low) / 2;
+         
+         // Compare middle element with its neighbours
+        // (if neighbours exist)
+        if(mid == 0 || arr[mid - 1] > arr[mid] && mid == n - 1 || 
+           arr[mid] < arr[mid + 1])
+                return mid;
+         
+        // If middle element is not minima and its left
+        // neighbour is smaller than it, then left half
+        // must have a local minima.
+        else if(mid > 0 && arr[mid - 1] < arr[mid])
+                return localMinUtil(arr, low, mid - 1, n);
+         
+        // If middle element is not minima and its right
+        // neighbour is smaller than it, then right half
+        // must have a local minima.
+        return localMinUtil(arr, mid + 1, high, n);
+    }
+```
+
+## Minimum number of platforms
+
+```
+// Program to find minimum number of platforms 
+ 
+import java.util.*;
+ 
+class GFG {
+  
+// Returns minimum number of platforms reqquired
+static int findPlatform(int arr[], int dep[], int n)
+{
+   // Sort arrival and departure arrays
+   Arrays.sort(arr);
+   Arrays.sort(dep);
+  
+   // plat_needed indicates number of platforms
+   // needed at a time
+   int plat_needed = 1, result = 1;
+   int i = 1, j = 0;
+  
+   // Similar to merge in merge sort to process 
+   // all events in sorted order
+   while (i < n && j < n)
+   {
+      // If next event in sorted order is arrival, 
+      // increment count of platforms needed
+      if (arr[i] <= dep[j])
+      {
+          plat_needed++;
+          i++;
+  
+          // Update result if needed 
+          if (plat_needed > result) 
+              result = plat_needed;
+      }
+  
+      // Else decrement count of platforms needed
+      else
+      {
+          plat_needed--;
+          j++;
+      }
+   }
+  
+   return result;
+}
+```
+
+### Undo/Redo
+https://codereview.stackexchange.com/questions/172662/command-pattern-with-undo-returning-response-in-invoker-and-command-class-or-c
