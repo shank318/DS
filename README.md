@@ -766,3 +766,52 @@ static int findPlatform(int arr[], int dep[], int n)
 
 ### Undo/Redo
 https://codereview.stackexchange.com/questions/172662/command-pattern-with-undo-returning-response-in-invoker-and-command-class-or-c
+
+### Find K smallest/largest element in an array
+
+https://www.geeksforgeeks.org/?p=2392/
+
+```
+public List<String> topKFrequent(String[] words, int k) {
+        List<String> ans = new ArrayList<>();
+        if(words == null || words.length == 0) {
+            return ans;
+        }
+        Map<String, Integer> map = new HashMap<>();
+        for(String word : words) {
+            map.put(word,map.getOrDefault(word, 0) + 1);
+        }
+        PriorityQueue<String> pq = new PriorityQueue<>
+            ((a,b) -> map.get(b) ==  map.get(a)? b.compareTo(a) : map.get(a) - map.get(b));
+        for (String word: map.keySet()) {
+            pq.offer(word);
+            if (pq.size() > k) pq.poll();
+        }
+        while (!pq.isEmpty()) ans.add(0,pq.poll());
+        return ans;
+    }
+    
+    O(nlogk)
+```
+
+### Lowest common ansestor
+
+```
+Node lca(Node node, int n1, int n2)  
+    { 
+        if (node == null) 
+            return null; 
+   
+        // If both n1 and n2 are smaller than root, then LCA lies in left 
+        if (node.data > n1 && node.data > n2) 
+            return lca(node.left, n1, n2); 
+   
+        // If both n1 and n2 are greater than root, then LCA lies in right 
+        if (node.data < n1 && node.data < n2)  
+            return lca(node.right, n1, n2); 
+   
+        return node; 
+    } 
+```
+
+###
