@@ -814,4 +814,6 @@ Node lca(Node node, int n1, int n2)
     } 
 ```
 
-###
+### Tiny URL
+
+https://blog.kamranali.in/system-design/url-shortner
