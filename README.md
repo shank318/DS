@@ -973,3 +973,42 @@ public class Trie {
     }
 }
 ```
+
+### Power of x 
+
+```
+int power(int x, unsigned int y) 
+{ 
+    int temp; 
+    if( y == 0) 
+        return 1; 
+    temp = power(x, y/2); 
+    if (y%2 == 0) 
+        return temp*temp; 
+    else
+        return x*temp*temp; 
+}
+```
+
+### Power of x negative
+
+```
+static float power(float x, int y) 
+    { 
+        float temp; 
+        if( y == 0) 
+            return 1; 
+        temp = power(x, y/2);  
+          
+        if (y%2 == 0) 
+            return temp*temp; 
+        else
+        { 
+            if(y > 0) 
+                return x * temp * temp; 
+            else
+                return (temp * temp) / x; 
+        } 
+    }
+```
+
