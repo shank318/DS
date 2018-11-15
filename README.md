@@ -1042,3 +1042,9 @@ public void pop() {
     q2 = temp;
 }
 ```
+
+## Buying and selling stock
+
+<img width="839" alt="screen shot 2018-11-15 at 5 43 08 pm" src="https://user-images.githubusercontent.com/5608772/48552245-fc2d5780-e8fd-11e8-85fb-16c93dadd1e3.png">
+
+<img width="874" alt="screen shot 2018-11-15 at 5 40 41 pm" src="https://user-images.githubusercontent.com/5608772/48552130-9f31a180-e8fd-11e8-9a83-d96b798d3e64.png">
