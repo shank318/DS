@@ -1012,3 +1012,33 @@ static float power(float x, int y)
     }
 ```
 
+### Stack using one Queue
+
+```
+private LinkedList<Integer> q1 = new LinkedList<>();
+
+// Push element x onto stack.
+public void push(int x) {
+    q1.add(x);
+    int sz = q1.size();
+    while (sz > 1) {
+        q1.add(q1.remove());
+        sz--;
+    }
+}
+```
+
+Using two queues
+
+```
+public void pop() {
+    while (q1.size() > 1) {
+        top = q1.remove();
+        q2.add(top);
+    }
+    q1.remove();
+    Queue<Integer> temp = q1;
+    q1 = q2;
+    q2 = temp;
+}
+```
