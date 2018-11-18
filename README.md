@@ -1087,3 +1087,65 @@ public void pop() {
 <img width="839" alt="screen shot 2018-11-15 at 5 43 08 pm" src="https://user-images.githubusercontent.com/5608772/48552245-fc2d5780-e8fd-11e8-85fb-16c93dadd1e3.png">
 
 <img width="874" alt="screen shot 2018-11-15 at 5 40 41 pm" src="https://user-images.githubusercontent.com/5608772/48552130-9f31a180-e8fd-11e8-9a83-d96b798d3e64.png">
+
+## Snake and ladder min moves
+
+```
+static class QueueEntry {
+		int vertex; // Vertex number
+		int distance; // distance of this vertex from source
+	};
+
+	static int MinimumDiceThrows(int board[], int N) {
+
+		boolean[] visited = new boolean[N];
+
+		for (int i = 0; i < N; i++) {
+			visited[i] = false;
+		}
+
+		Queue<QueueEntry> q = new LinkedList<QueueEntry>();
+
+		visited[0] = true;
+		QueueEntry s = new QueueEntry();
+		s.distance = 0;
+		s.vertex = 0;
+		q.add(s);
+
+		QueueEntry qe = new QueueEntry();
+
+		while (!q.isEmpty()) {
+			
+			qe = q.peek();
+			int vertex = qe.vertex;
+
+			if (vertex == N - 1){
+				break;
+			}
+				
+			q.remove();
+			for (int i = vertex + 1; i <= (vertex + 6) && i < N; ++i) {
+
+				if (visited[i] == false) {
+
+					QueueEntry cell = new QueueEntry();
+					cell.distance = (qe.distance + 1);
+					visited[i] = true;
+					if (board[i] != -1){
+						
+						cell.vertex = board[i];
+					
+					}else{
+						
+						cell.vertex = i;
+					
+					}
+					q.add(cell);
+					
+				}
+			}
+		}
+
+		return qe.distance;
+	}
+```
