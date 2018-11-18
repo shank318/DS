@@ -1149,3 +1149,9 @@ static class QueueEntry {
 		return qe.distance;
 	}
 ```
+
+### Longest consicutive subsequence
+
+```
+https://youtu.be/yuRo0ttOF9E?t=296
+```
