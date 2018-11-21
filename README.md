@@ -1529,3 +1529,94 @@ bool isSafe(int grid[N][N], int row, int col, int num)
            !UsedInBox(grid, row - row%SQN , col - col%SQN, num);
 }
 ```
+
+## Count no of Islands
+
+```
+static final int ROW = 5, COL = 5; 
+  
+    // A function to check if a given cell (row, col) can 
+    // be included in DFS 
+    boolean isSafe(int M[][], int row, int col, 
+                   boolean visited[][]) 
+    { 
+        // row number is in range, column number is in range 
+        // and value is 1 and not yet visited 
+        return (row >= 0) && (row < ROW) && 
+               (col >= 0) && (col < COL) && 
+               (M[row][col]==1 && !visited[row][col]); 
+    } 
+  
+    // A utility function to do DFS for a 2D boolean matrix. 
+    // It only considers the 8 neighbors as adjacent vertices 
+    void DFS(int M[][], int row, int col, boolean visited[][]) 
+    { 
+        // These arrays are used to get row and column numbers 
+        // of 8 neighbors of a given cell 
+        int rowNbr[] = new int[] {-1, -1, -1,  0, 0,  1, 1, 1}; 
+        int colNbr[] = new int[] {-1,  0,  1, -1, 1, -1, 0, 1}; 
+  
+        // Mark this cell as visited 
+        visited[row][col] = true; 
+  
+        // Recur for all connected neighbours 
+        for (int k = 0; k < 8; ++k) 
+            if (isSafe(M, row + rowNbr[k], col + colNbr[k], visited) ) 
+                DFS(M, row + rowNbr[k], col + colNbr[k], visited); 
+    } 
+  
+    // The main function that returns count of islands in a given 
+    //  boolean 2D matrix 
+    int countIslands(int M[][]) 
+    { 
+        // Make a bool array to mark visited cells. 
+        // Initially all cells are unvisited 
+        boolean visited[][] = new boolean[ROW][COL]; 
+  
+  
+        // Initialize count as 0 and travese through the all cells 
+        // of given matrix 
+        int count = 0; 
+        for (int i = 0; i < ROW; ++i) 
+            for (int j = 0; j < COL; ++j) 
+                if (M[i][j]==1 && !visited[i][j]) // If a cell with 
+                {                                 // value 1 is not 
+                    // visited yet, then new island found, Visit all 
+                    // cells in this island and increment island count 
+                    DFS(M, i, j, visited); 
+                    ++count; 
+                } 
+  
+        return count; 
+    } 
+```
+
+## Count no of Islands Stack ## FloodFill
+```
+ Stack<Pair> stack = new Stack<>();
+            Set<Pair> visited = new HashSet<>();
+
+            // Starting point.
+            Pair start = new Pair(2, 2);
+            stack.add(start);
+
+            while (!stack.isEmpty()) {
+                Pair pair = stack.pop();
+                if (matrix[pair.row][pair.col] == 3) {
+                    continue;
+                }
+                for (int i = 0; i < directions.length; i++) {
+                    int x = pair.row + directions[i][0];
+                    int y = pair.col + directions[i][1];
+                    if (x < 0 || x >= matrix.length || y < 0 || y >= matrix[0].length || matrix[x][y] != 2 || visited.contains(new Pair(x, y))) {
+                        continue;
+                    }
+                    stack.add(new Pair(x, y));
+                }
+                visited.add(pair);
+                matrix[pair.row][pair.col] = 3;
+            }
+
+```
+
+
