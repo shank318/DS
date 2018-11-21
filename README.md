@@ -1388,63 +1388,57 @@ boolean areIdentical(Node root1, Node root2)
 					   && mat[row][col] == 1 && !visited[row][col];
 	}
 
-	// Find Shortest Possible Route in a matrix mat from source
-	// cell (i, j) to destination cell (x, y)
-	private static void BFS(int mat[][], int i, int j, int x, int y)
-	{
-		// construct a matrix to keep track of visited cells
-		boolean[][] visited = new boolean[M][N];
+	int BFS(int mat[][], Point src, Point dest) {
 
-		// create an empty queue
-		Queue<Node> q = new ArrayDeque<>();
+	// check source and destination cell
+	// of the matrix have value 1
+	if ((mat[src.x][src.y] == 0) || (mat[dest.x][dest.y] == 0))
+	    return Integer.MAX_VALUE;
 
-		// mark source cell as visited and enqueue the source node
-		visited[i][j] = true;
-		q.add(new Node(i, j, 0));
+	boolean[][] visited = new boolean[ROW][COL];
 
-		// stores length of longest path from source to destination
-		int min_dist = Integer.MAX_VALUE;
+	// Mark the source cell as visited
+	visited[src.x][src.y] = true;
 
-		// run till queue is not empty
-		while (!q.isEmpty())
-		{
-			// pop front node from queue and process it
-			Node node = q.poll();
+	// Create a queue for BFS  --> see http://stackoverflow.com/questions/11149707/best-implementation-of-java-queue
+	Queue<QueueNode> q = new ArrayDeque<QueueNode>();
 
-			// (i, j) represents current cell and dist stores its
-			// minimum distance from the source
-			i = node.x;
-			j = node.y;
-			int dist = node.dist;
+	// distance of source cell is 0
+	QueueNode s = new QueueNode(src, 0);
+	q.add(s); // Enqueue source cell
 
-			// if destination is found, update min_dist and stop
-			if (i == x && j == y)
-			{
-				min_dist = dist;
-				break;
-			}
+	// Do a BFS starting from source cell
+	while (!q.isEmpty()) {
+	    QueueNode curr = q.peek();
+	    Point pt = curr.pt;
 
-			// check for all 4 possible movements from current cell
-			// and enqueue each valid movement
-			for (int k = 0; k < 4; k++)
-			{
-				// check if it is possible to go to position
-				// (i + row[k], j + col[k]) from current position
-				if (isValid(mat, visited, i + row[k], j + col[k]))
-				{
-					// mark next cell as visited and enqueue it
-					visited[i + row[k]][j + col[k]] = true;
-					q.add(new Node(i + row[k], j + col[k], dist + 1));
-				}
-			}
+	    // If we have reached the destination cell,
+	    // we are done
+	    if (pt.x == dest.x && pt.y == dest.y)
+		return curr.dist;
+
+	    // Otherwise dequeue the front cell in the queue
+	    // and enqueue its adjacent cells
+	    q.poll();
+
+	    for (int i = 0; i < 4; i++) {
+		int row = pt.x + rowNum[i];
+		int col = pt.y + colNum[i];
+
+		// if adjacent cell is valid, has path and
+		// not visited yet, enqueue it.
+		if ((isValid(row, col) && mat[row][col] == 1)
+			&& !visited[row][col]) {
+		    // mark cell as visited and enqueue it
+		    visited[row][col] = true;
+		    QueueNode adjCell = new QueueNode(new Point(row, col),
+			    curr.dist + 1);
+		    q.add(adjCell);
 		}
-
-		if (min_dist != Integer.MAX_VALUE) {
-			System.out.print("The shortest path from source to destination "
-							+ "has length " + min_dist);
-		}
-		else {
-			System.out.print("Destination can't be reached from source");
-		}
+	    }
 	}
+
+	// return -1 if destination cannot be reached
+	return Integer.MAX_VALUE;
+    }
 ```
