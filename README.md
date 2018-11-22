@@ -1639,3 +1639,49 @@ public int getMin() {
 }
 ```
 
+### All anagram in a string
+
+```
+static void search(String pat, String txt) 
+    { 
+        int M = pat.length(); 
+        int N = txt.length(); 
+  
+        // countP[]:  Store count of all  
+        // characters of pattern 
+        // countTW[]: Store count of current 
+        // window of text 
+        char[] countP = new char[MAX]; 
+        char[] countTW = new char[MAX]; 
+        for (int i = 0; i < M; i++) 
+        { 
+            (countP[pat.charAt(i)])++; 
+            (countTW[txt.charAt(i)])++; 
+        } 
+  
+        // Traverse through remaining characters 
+        // of pattern 
+        for (int i = M; i < N; i++) 
+        { 
+            // Compare counts of current window 
+            // of text with counts of pattern[] 
+            if (compare(countP, countTW)) 
+                System.out.println("Found at Index " + 
+                                          (i - M)); 
+              
+            // Add current character to current  
+            // window 
+            (countTW[txt.charAt(i)])++; 
+  
+            // Remove the first character of previous 
+            // window 
+            countTW[txt.charAt(i-M)]--; 
+        } 
+  
+        // Check for the last window in text 
+        if (compare(countP, countTW)) 
+            System.out.println("Found at Index " +  
+                                       (N - M)); 
+    } 
+```
+
