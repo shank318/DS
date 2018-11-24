@@ -921,6 +921,43 @@ Node findLCA(Node node, int n1, int n2)
     }
 ```
 
+### Distance between two nodes of a binary tree
+
+```
+Node lca = findLCA(root,n1,n2);
+int l1 = getLevel(lca,n1,0);
+int l2 = getLevel(lca,n2,0);
+return l1+l2;
+```
+
+### Level of a Node in a Binary tree
+
+```
+ /* Helper function for getLevel().  It returns level of the data 
+    if data is present in tree, otherwise returns 0.*/
+    int getLevelUtil(Node node, int data, int level)  
+    { 
+        if (node == null) 
+            return 0; 
+   
+        if (node.data == data) 
+            return level; 
+   
+        int downlevel = getLevelUtil(node.left, data, level + 1); 
+        if (downlevel != 0) 
+            return downlevel; 
+   
+        downlevel = getLevelUtil(node.right, data, level + 1); 
+        return downlevel; 
+    } 
+   
+    /* Returns level of given data value */
+    int getLevel(Node node, int data)  
+    { 
+        return getLevelUtil(node, data, 1); 
+    } 
+```
+
 ### Tiny URL
 
 https://blog.kamranali.in/system-design/url-shortner
