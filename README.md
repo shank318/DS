@@ -1992,4 +1992,60 @@ public boolean canCross(int[] stones) {
     }
 
 ```
+### Fence Painting Algorithm
 
+```
+for n = 1
+    diff = k, same = 0
+    total = k
+
+for n = 2
+    diff = k * (k-1) //k choices for
+           first post, k-1 for next
+    same = k //k choices for common 
+           color of two posts
+    total = k +  k * (k-1)
+
+for n = 3
+    diff = [k +  k * (k-1)] * (k-1) 
+           (k-1) choices for 3rd post 
+           to not have color of 2nd 
+           post.
+    same = k * (k-1) 
+           c'' != c, (k-1) choices for it
+
+Hence we deduce that,
+total[i] = same[i] + diff[i]
+same[i]  = diff[i-1]
+diff[i]  = (diff[i-1] + diff[i-2]) * (k-1)
+         = total[i-1] * (k-1)
+	 
+	 
+ long countWays(int n, int k) 
+{ 
+    // To store results for subproblems 
+    long dp[n + 1]; 
+    // There are k ways to color first post 
+    dp[1] = k; 
+  
+    // There are 0 ways for single post to 
+    // violate (same color_ and k ways to 
+    // not violate (different color) 
+    int same = 0, diff = k; 
+  
+    // Fill for 2 posts onwards 
+    for (int i = 2; i <= n; i++) 
+    { 
+        // Current same is same as previous diff 
+        same = diff; 
+  
+        // We always have k-1 choices for next post 
+        diff = dp[i-1] * (k-1); 
+       
+        // Total choices till i. 
+        dp[i] = (same + diff) % mod; 
+    } 
+  
+    return dp[n]; 
+}
+```
