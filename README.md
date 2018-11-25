@@ -930,6 +930,27 @@ int l2 = getLevel(lca,n2,0);
 return l1+l2;
 ```
 
+### Height of a binary tree
+
+```
+int height(Node root) 
+    { 
+        if (root == null) 
+           return 0; 
+        else
+        { 
+            /* compute  height of each subtree */
+            int lheight = height(root.left); 
+            int rheight = height(root.right); 
+              
+            /* use the larger one */
+            if (lheight > rheight) 
+                return(lheight+1); 
+            else return(rheight+1);  
+        } 
+    } 
+```
+
 ### Level of a Node in a Binary tree
 
 ```
@@ -956,6 +977,23 @@ return l1+l2;
     { 
         return getLevelUtil(node, data, 1); 
     } 
+```
+
+### Mirror image of a tree
+
+```
+mirror(Node root){
+ if(root!=null){
+   mirror(root.left);
+   mirror(root.right);
+   Node temp = root.left;
+   root.left = root.right;
+   root.right= temp;
+   
+ }else{
+ return
+ }
+}
 ```
 
 ### Tiny URL
