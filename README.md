@@ -1965,5 +1965,31 @@ void printSpiral(Node node)
         } 
     } 
 ```
+### Frog Jump
 
+https://www.youtube.com/watch?v=jH_5ypQggWg&t=614s
+
+```
+public boolean canCross(int[] stones) {
+        int n = stones.length;
+        int[] dp = new int[n];
+        for (int i = 0; i < n; i++) {
+            dp[i] = Integer.MAX_VALUE;
+        }
+        dp[0] = 0;
+        for (int i = 1; i < n; i++) {
+            for (int j = 0; j < i; j++) {
+                if (i <= j + stones[j]) {
+                    dp[i] = Math.min(dp[i], dp[j] + 1);
+                }
+            }
+        }
+        for (int i = 0; i < dp.length; i++) {
+            System.out.println(dp[i]);
+        }
+
+        return dp[n - 1] == -1 ? false : true;
+    }
+
+```
 
