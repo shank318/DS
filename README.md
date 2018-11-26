@@ -2121,3 +2121,24 @@ boolean identicalTrees(Node a, Node b)
         return false; 
     } 
 ```
+### 0,1,2 seggregation
+
+```
+void segg(int[] arr){
+   int low=0,high=arr.length,mid=0;
+   while(mid<=high){
+     switch(a[mid])
+       Case 0:
+         Swap(a[low],a[mid]);
+	 low++,mid++;
+	 break;
+	Case 1:
+	  mid++;
+	  break;
+	Case 2:
+	  Swap(a[mid],a[high]);
+	  high--;
+	  break;
+   }
+}
+```
