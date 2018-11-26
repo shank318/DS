@@ -1916,55 +1916,111 @@ int maxLoot(int *hval, int n)
 ### Zig Zag tree
 
 ```
-void printSpiral(Node node)  
-    { 
-        if (node == null)  
-            return;   // NULL check 
+void printZigZagTraversal() { 
+      
+    // if null then return 
+    if (rootNode == null) { 
+    return; 
+    } 
   
-        // Create two stacks to store alternate levels 
-        Stack<Node> s1 = new Stack<Node>();// For levels to be printed from right to left 
-        Stack<Node> s2 = new Stack<Node>();// For levels to be printed from left to right 
+    // declare two stacks 
+    Stack<Node> currentLevel = new Stack<>(); 
+    Stack<Node> nextLevel = new Stack<>(); 
   
-        // Push first level to first stack 's1' 
-        s1.push(node); 
+    // push the root 
+    currentLevel.push(rootNode); 
+    boolean leftToRight = true; 
   
-        // Keep ptinting while any of the stacks has some nodes 
-        while (!s1.empty() || !s2.empty())  
-        { 
-            // Print nodes of current level from s1 and push nodes of 
-            // next level to s2 
-            while (!s1.empty())  
-            { 
-                Node temp = s1.peek(); 
-                s1.pop(); 
-                System.out.print(temp.data + " "); 
+    // check if stack is empty 
+    while (!currentLevel.isEmpty()) { 
   
-                // Note that is right is pushed before left 
-                if (temp.right != null)  
-                    s2.push(temp.right); 
-                  
-                if (temp.left != null)  
-                    s2.push(temp.left); 
-                  
-            } 
+    // pop out of stack 
+    Node node = currentLevel.pop(); 
+      
+    // print the data in it 
+    System.out.print(node.data + " "); 
   
-            // Print nodes of current level from s2 and push nodes of 
-            // next level to s1 
-            while (!s2.empty())  
-            { 
-                Node temp = s2.peek(); 
-                s2.pop(); 
-                System.out.print(temp.data + " "); 
-  
-                // Note that is left is pushed before right 
-                if (temp.left != null) 
-                    s1.push(temp.left); 
-                if (temp.right != null) 
-                    s1.push(temp.right); 
-            } 
+    // store data according to current 
+    // order. 
+    if (leftToRight) { 
+        if (node.leftChild != null) { 
+        nextLevel.push(node.leftChild); 
+        } 
+          
+        if (node.rightChild != null) { 
+        nextLevel.push(node.rightChild); 
         } 
     } 
+    else { 
+        if (node.rightChild != null) { 
+        nextLevel.push(node.rightChild); 
+        } 
+          
+        if (node.leftChild != null) { 
+        nextLevel.push(node.leftChild); 
+        } 
+    } 
+  
+    if (currentLevel.isEmpty()) { 
+        leftToRight = !leftToRight; 
+        Stack<Node> temp = currentLevel; 
+        currentLevel = nextLevel; 
+        nextLevel = temp; 
+    } 
+    } 
+} 
+}
 ```
+
+### Print Spiral tree
+```
+void printSpiral(struct node *root) 
+{ 
+    if (root == NULL)  return;   // NULL check 
+  
+    // Create two stacks to store alternate levels 
+    stack<struct node*> s1;  // For levels to be printed from right to left 
+    stack<struct node*> s2;  // For levels to be printed from left to right 
+  
+    // Push first level to first stack 's1' 
+    s1.push(root); 
+  
+    // Keep ptinting while any of the stacks has some nodes 
+    while (!s1.empty() || !s2.empty()) 
+    { 
+        // Print nodes of current level from s1 and push nodes of 
+        // next level to s2 
+        while (!s1.empty()) 
+        { 
+            struct node *temp = s1.top(); 
+            s1.pop(); 
+            cout << temp->data << " "; 
+  
+            // Note that is right is pushed before left 
+            if (temp->right) 
+                s2.push(temp->right); 
+            if (temp->left) 
+                s2.push(temp->left); 
+        } 
+  
+        // Print nodes of current level from s2 and push nodes of 
+        // next level to s1 
+        while (!s2.empty()) 
+        { 
+            struct node *temp = s2.top(); 
+            s2.pop(); 
+            cout << temp->data << " "; 
+  
+            // Note that is left is pushed before right 
+            if (temp->left) 
+                s1.push(temp->left); 
+            if (temp->right) 
+                s1.push(temp->right); 
+        } 
+    } 
+} 
+```
+
 ### Frog Jump
 
 https://www.youtube.com/watch?v=jH_5ypQggWg&t=614s
@@ -1984,10 +2040,6 @@ public boolean canCross(int[] stones) {
                 }
             }
         }
-        for (int i = 0; i < dp.length; i++) {
-            System.out.println(dp[i]);
-        }
-
         return dp[n - 1] == -1 ? false : true;
     }
 
@@ -2043,9 +2095,29 @@ diff[i]  = (diff[i-1] + diff[i-2]) * (k-1)
         diff = dp[i-1] * (k-1); 
        
         // Total choices till i. 
-        dp[i] = (same + diff) % mod; 
+        dp[i] = (same + diff); 
     } 
   
     return dp[n]; 
 }
+```
+
+### Check if two trees re identical
+
+```
+boolean identicalTrees(Node a, Node b)  
+    { 
+        /*1. both empty */
+        if (a == null && b == null) 
+            return true; 
+              
+        /* 2. both non-empty -> compare them */
+        if (a != null && b != null)  
+            return (a.data == b.data 
+                    && identicalTrees(a.left, b.left) 
+                    && identicalTrees(a.right, b.right)); 
+   
+        /* 3. one empty, one not -> false */
+        return false; 
+    } 
 ```
