@@ -2338,3 +2338,19 @@ bool wordBreak(string str)
     return false; 
 } 
 ```
+
+### Check Loop in a linkelist
+```
+private boolean checkLoop(Node head){
+        Node p=head;
+        Node q=head;
+        while(p!=null && q!=null && q.next!=null){
+            p=p.next;
+            q=q.next.next;
+            if(p==q){
+                return true;
+            }
+        }
+        return false;
+    }
+```
