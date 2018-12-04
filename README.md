@@ -2422,3 +2422,7 @@ good(pages, visitedPages, depth)
 
 good(homepage, List(), 0)
 ```
+
+### Two nodes of a BST are swapped, correct the BST
+
+<img width="942" alt="screen shot 2018-12-05 at 12 36 05 am" src="https://user-images.githubusercontent.com/5608772/49466352-d375ef00-f825-11e8-914c-0f791e8e9cee.png">
