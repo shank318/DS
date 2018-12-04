@@ -1295,9 +1295,8 @@ static class QueueEntry {
 
 ### Longest consicutive subsequence
 
-```
-https://youtu.be/yuRo0ttOF9E?t=296
-```
+<img width="698" alt="screen shot 2018-12-04 at 2 53 16 pm" src="https://user-images.githubusercontent.com/5608772/49431880-6e45dd80-f7d4-11e8-95fd-367327d1d40f.png">
+
 
 ### Pallindrome in Likekelist
 
