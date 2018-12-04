@@ -165,18 +165,32 @@ public int atoi(String str) {
 ```
 public class Solution {
     public int lengthOfLongestSubstring(String s) {
-        int n = s.length(), ans = 0;
-        Map<Character, Integer> map = new HashMap<>(); // current index of character
-        // try to extend the range [i, j]
-        for (int j = 0, i = 0; j < n; j++) {
-            if (map.containsKey(s.charAt(j))) {
-                i = Math.max(map.get(s.charAt(j)), i);
-            }
-            ans = Math.max(ans, j - i + 1);
-            map.put(s.charAt(j), j + 1);
-        }
-        return ans;
+    if(s==null||s.length()==0){
+        return 0;
     }
+    int result = 0;
+    int k=0;
+    HashSet<Character> set = new HashSet<Character>();
+    for(int i=0; i<s.length(); i++){
+        char c = s.charAt(i);
+        if(!set.contains(c)){
+            set.add(c);
+            result = Math.max(result, set.size());
+        }else{
+            while(k<i){
+                if(s.charAt(k)==c){
+                    k++;
+                    break;
+                }else{
+                    set.remove(s.charAt(k));
+                    k++;
+                }
+            }
+        }  
+    }
+ 
+    return result;
+}
 }
 ```
 
