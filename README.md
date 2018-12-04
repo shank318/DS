@@ -2402,3 +2402,23 @@ void sortArrayUsingStacks(int arr[], int n)
     } 
 } 
 ```
+
+### Pages tree - linking of pages is a website is good
+```
+# breadth first
+good(pages, visitedPages, depth)
+  if depth &gt; 5
+    return false
+  if pages.empty
+    return true
+  newPages = List()
+  for p in pages
+    subPages = f(p)
+    for sp in subPages
+      if !visitedPages.contains(sp)
+        visitedPages.add(sp)
+        newPages.add(sp)
+  return good(newPages, visitedPages, depth + 1)
+
+good(homepage, List(), 0)
+```
