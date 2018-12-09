@@ -3033,3 +3033,63 @@ void kthLargestUtil(Node *root, int k, int &c)
     kthLargestUtil(root->left, k, c); 
 } 
 ```
+### Path to given sum.
+
+```
+int sum=0;
+int givenSum = 20;
+Stack<Integer> s;
+void printPath(Node root){
+  if(root==null) return;
+  sum = sum +root.data;
+  s.push(root.data);
+  if(sum==givenSum)
+    print stack
+  printPath(root.left);
+  printPath(root.right);
+  sum = sum -root.data;
+  s.pop();
+}
+```
+
+### Print all paths of a binary tree
+
+```
+Stack<Integer> s;
+printAllPath(Node root){
+ if(root==null) return;
+  s.push(root.data);
+  printPath(root.left);
+  if(root.left==null && root.right==null)
+    print stack
+  printPath(root.right);
+  s.pop();
+}
+```
+
+### Path exists in a binary tree
+
+```
+bool existPath(struct Node *root, int arr[], int n, int index) 
+{ 
+    // If root is NULL, then there must not be any element 
+    // in array. 
+    if (root == NULL) 
+        return (n == 0); 
+  
+   // If this node is a leaf and matches with last entry 
+   // of array. 
+   if ((root->left == NULL && root->right == NULL) && 
+       (root->data == arr[index]) && (index == n-1)) 
+            return true; 
+  
+   // If current node is equal to arr[index] this means 
+   // that till this level path has been matched and 
+   // remaining path can be either in left subtree or 
+   // right subtree. 
+   return ((index < n) && (root->data == arr[index]) && 
+              (existPath(root->left, arr, n,  index+1) || 
+               existPath(root->right, arr, n, index+1) )); 
+}
+```
+
