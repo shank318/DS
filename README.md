@@ -2896,3 +2896,140 @@ void sortStack(struct stack **s)
     } 
 } 
 ```
+
+### Is Tree BST
+
+```
+boolean isBST()  { 
+        return isBSTUtil(root, Integer.MIN_VALUE, 
+                               Integer.MAX_VALUE); 
+    } 
+  
+    /* Returns true if the given tree is a BST and its 
+      values are >= min and <= max. */
+    boolean isBSTUtil(Node node, int min, int max) 
+    { 
+        /* an empty tree is BST */
+        if (node == null) 
+            return true; 
+  
+        /* false if this node violates the min/max constraints */
+        if (node.data < min || node.data > max) 
+            return false; 
+  
+        /* otherwise check the subtrees recursively 
+        tightening the min/max constraints */
+        // Allow only distinct values 
+        return (isBSTUtil(node.left, min, node.data-1) && 
+                isBSTUtil(node.right, node.data+1, max)); 
+    } 
+```
+### Diagonal view of Tree
+
+```
+static void diagonalPrintUtil(Node root,int d, 
+            HashMap<Integer,Vector<Integer>> diagonalPrint){ 
+          
+         // Base case 
+        if (root == null) 
+            return; 
+          
+        // get the list at the particular d value 
+        Vector<Integer> k = diagonalPrint.get(d); 
+          
+        // k is null then create a vector and store the data 
+        if (k == null) 
+        { 
+            k = new Vector<>(); 
+            k.add(root.data); 
+        } 
+          
+        // k is not null then update the list 
+        else
+        { 
+            k.add(root.data); 
+        } 
+          
+        // Store all nodes of same line together as a vector 
+        diagonalPrint.put(d,k); 
+          
+        // Increase the vertical distance if left child 
+        diagonalPrintUtil(root.left, d + 1, diagonalPrint); 
+           
+        // Vertical distance remains same for right child 
+        diagonalPrintUtil(root.right, d, diagonalPrint); 
+    } 
+      
+    // Print diagonal traversal of given binary tree 
+    static void diagonalPrint(Node root) 
+    { 
+        // create a map of vectors to store Diagonal elements 
+        HashMap<Integer,Vector<Integer>> diagonalPrint = new HashMap<>(); 
+        diagonalPrintUtil(root, 0, diagonalPrint); 
+          
+        System.out.println("Diagonal Traversal of Binnary Tree"); 
+        for (Entry<Integer, Vector<Integer>> entry : diagonalPrint.entrySet()) 
+        { 
+            System.out.println(entry.getValue()); 
+        } 
+    } 
+```
+
+### Sum of k elements in BST
+
+```
+int ksmallestElementSumRec(Node *root, int k, int &count) 
+{ 
+    // Base cases 
+    if (root == NULL) 
+        return 0; 
+    if (count > k) 
+        return 0; 
+  
+    // Compute sum of elements in left subtree 
+    int res = ksmallestElementSumRec(root->left, k, count); 
+    if (count >= k) 
+        return res; 
+  
+    // Add root's data 
+    res += root->data; 
+  
+    // Add current Node 
+    count++; 
+    if (count >= k) 
+      return res; 
+  
+    // If count is less than k, return right subtree Nodes 
+    return res + ksmallestElementSumRec(root->right, k, count); 
+} 
+```
+
+### Kth largest element in BST
+
+```
+void kthLargestUtil(Node *root, int k, int &c) 
+{ 
+    // Base cases, the second condition is important to 
+    // avoid unnecessary recursive calls 
+    if (root == NULL || c >= k) 
+        return; 
+  
+    // Follow reverse inorder traversal so that the 
+    // largest element is visited first 
+    kthLargestUtil(root->right, k, c); 
+  
+    // Increment count of visited nodes 
+    c++; 
+  
+    // If c becomes k now, then this is the k'th largest  
+    if (c == k) 
+    { 
+        cout << "K'th largest element is "
+             << root->key << endl; 
+        return; 
+    } 
+  
+    // Recur for left subtree 
+    kthLargestUtil(root->left, k, c); 
+} 
+```
