@@ -3093,3 +3093,62 @@ bool existPath(struct Node *root, int arr[], int n, int index)
 }
 ```
 
+### Cousins of a node in a tree
+
+```
+void printGivenLevel(Node* root, Node *node, int level) 
+{ 
+    // Base cases 
+    if (root == NULL || level < 2) 
+        return; 
+  
+    // If current node is parent of a node with 
+    // given level 
+    if (level == 2) 
+    { 
+        if (root->left == node || root->right == node) 
+            return; 
+        if (root->left) 
+           printf("%d ", root->left->data); 
+        if (root->right) 
+           printf("%d ", root->right->data); 
+    } 
+  
+    // Recur for left and right subtrees 
+    else if (level > 2) 
+    { 
+        printGivenLevel(root->left, node, level-1); 
+        printGivenLevel(root->right, node, level-1); 
+    } 
+} 
+  
+// This function prints cousins of a given node 
+void printCousins(Node *root, Node *node) 
+{ 
+    // Get level of given node 
+    int level = getLevel(root, node, 1); 
+  
+    // Print nodes of given level. 
+    printGivenLevel(root, node, level); 
+}
+```
+
+### Print nodes k distance of the tree
+```
+void printKDistant(Node node, int k)  
+    { 
+        if (node == null) 
+            return; 
+        if (k == 0)  
+        { 
+            System.out.print(node.data + " "); 
+            return; 
+        }  
+        else 
+        { 
+            printKDistant(node.left, k - 1); 
+            printKDistant(node.right, k - 1); 
+        } 
+    } 
+```
+
