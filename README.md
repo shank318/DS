@@ -3151,4 +3151,241 @@ void printKDistant(Node node, int k)
         } 
     } 
 ```
+### form Max num from a number
 
+```
+static int printMaxNum(int num) 
+    { 
+        // hashed array to store count of digits 
+        int count[] = new int[10]; 
+          
+        // Converting given number to string 
+        String str = Integer.toString(num); 
+          
+        // Updating the count array 
+        for(int i=0; i < str.length(); i++) 
+            count[str.charAt(i)-'0']++; 
+          
+        // result is to store the final number 
+        int result = 0, multiplier = 1; 
+          
+        // Traversing the count array 
+        // to calculate the maximum number 
+        for (int i = 0; i <= 9; i++) 
+        { 
+            while (count[i] > 0) 
+            { 
+                result = result + (i * multiplier); 
+                count[i]--; 
+                multiplier = multiplier * 10; 
+            } 
+        } 
+       
+        // return the result 
+        return result; 
+    } 
+```
+
+### Form the largest number using at most one swap operation 
+
+```
+static String largestNumber(String num) 
+    { 
+        int n = num.length(); 
+        int right; 
+        int rightMax[] = new int[n]; 
+  
+        // for the rightmost digit, there 
+        // will be no greater right digit 
+        rightMax[n - 1] = -1; 
+  
+        // index of the greatest right digit 
+        // till the current index from the 
+        // right direction 
+        right = n - 1; 
+  
+        // traverse the array from second right 
+        // element up to the left element 
+        for (int i = n - 1; i >= 0 ; i--) 
+        { 
+            // if 'num.charAt(i)' is less than the 
+            // greatest digit encountered so far 
+            if (num.charAt(i) < num.charAt(right)) 
+                rightMax[i] = right; 
+  
+            else
+            { 
+                // there is no greater right digit 
+                // for 'num.charAt(i)' 
+                rightMax[i] = -1; 
+  
+                // update 'right' index 
+                right = i; 
+            } 
+        } 
+  
+        // traverse the 'rightMax[]' array from 
+        // left to right 
+        for (int i = 0; i < n; i++) 
+        { 
+  
+            // if for the current digit, greater 
+            // right digit exists then swap it 
+            // with its greater right digit and break 
+            if (rightMax[i] != -1) 
+            { 
+                // performing the required swap operation 
+                num = swap(num,i,rightMax[i]); 
+                break; 
+            } 
+        } 
+  
+        // required largest number 
+        return num; 
+    } 
+```
+### Form the smallest number using at most one swap operation
+
+```
+ public static String smallestNumber(String str){ 
+          
+        char[] num = str.toCharArray(); 
+        int n = str.length(); 
+        int[] rightMin = new int[n]; 
+  
+        // for the rightmost digit, there 
+        // will be no smaller right digit 
+        rightMin[n - 1] = -1; 
+  
+        // index of the smallest right digit  
+        // till the current index from the  
+        // right direction 
+        int right = n - 1; 
+  
+        // traverse the array from second  
+        // right element up to the left  
+        // element 
+        for (int i = n - 2; i >= 1; i--)  
+        {  
+            // if 'num[i]' is greater than  
+            // the smallest digit  
+            // encountered so far 
+            if (num[i] > num[right]) 
+            rightMin[i] = right; 
+  
+            else
+            {  
+            // there is no smaller right  
+            // digit for 'num[i]' 
+            rightMin[i] = -1; 
+  
+            // update 'right' index 
+            right = i; 
+            } 
+        } 
+  
+        // special condition for the 1st  
+        // digit so that it is not swapped  
+        // with digit '0' 
+        int small = -1; 
+        for (int i = 1; i < n; i++) 
+            if (num[i] != '0') 
+            { 
+                if (small == -1) 
+                { 
+                    if (num[i] < num[0]) 
+                        small = i; 
+                } 
+                else if (num[i] < num[small]) 
+                    small = i;                  
+            } 
+      
+        if (small != -1){ 
+            char temp; 
+            temp = num[0]; 
+            num[0] = num[small]; 
+            num[small] = temp; 
+        } 
+        else
+        { 
+            // traverse the 'rightMin[]'  
+            // array from 2nd digit up  
+            // to the last digit 
+            for (int i = 1; i < n; i++)  
+            {  
+                // if for the current digit,  
+                // smaller right digit exists,  
+                // then swap it with its smaller 
+                // right digit and break 
+                if (rightMin[i] != -1)  
+                {  
+                    // performing the required  
+                    // swap operation 
+                    char temp; 
+                    temp = num[i]; 
+                    num[i] = num[rightMin[i]]; 
+                    num[rightMin[i]] = temp; 
+                    break; 
+                } 
+            } 
+        } 
+  
+        // required smallest number 
+        return (new String(num));          
+    } 
+      
+    // driver function 
+    public static void main(String argc[]){ 
+        String num = "9625635"; 
+        System.out.println("Smallest number: "+ 
+                          smallestNumber(num)); 
+    } 
+} 
+```
+
+### Check if Robot moves are cicular
+
+```
+static boolean isCircular(char path[]) 
+{ 
+  // Initialize starting 
+  // point for robot as  
+  // (0, 0) and starting 
+  // direction as N North 
+  int x = 0, y = 0; 
+  int dir = 0; 
+   
+  // Traverse the path given for robot 
+  for (int i=0; i < path.length; i++) 
+  { 
+      // Find current move 
+      char move = path[i]; 
+   
+      // If move is left or 
+      // right, then change direction 
+      if (move == 'R') 
+        dir = (dir + 1)%4; 
+      else if (move == 'L') 
+        dir = (4 + dir - 1) % 4; 
+   
+      // If move is Go, then  
+      // change  x or y according to 
+      // current direction 
+      else // if (move == 'G') 
+      { 
+         if (dir == 0) 
+            y++; 
+         else if (dir == 1) 
+            x++; 
+         else if (dir == 2) 
+            y--; 
+         else // dir == 3 
+            x--; 
+      } 
+  } 
+   
+   // If robot comes back to 
+   // (0, 0), then path is cyclic 
+  return (x == 0 && y == 0); 
+} 
+```
