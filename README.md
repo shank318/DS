@@ -3570,5 +3570,78 @@ public static void subArraySum(int[] arr, int n, int sum) {
         } 
     } 
 ```
+### Subarray sum of size K
 
+```
+int subArraySum(int arr[], int n, int sum)  
+    { 
+        int curr_sum = arr[0], start = 0, i; 
+  
+        // Pick a starting point 
+        for (i = 1; i <= n; i++)  
+        { 
+            // If curr_sum exceeds the sum, then remove the starting elements 
+            while (curr_sum > sum && start < i-1) 
+            { 
+                curr_sum = curr_sum - arr[start]; 
+                start++; 
+            } 
+              
+            // If curr_sum becomes equal to sum, then return true 
+            if (curr_sum == sum)  
+            { 
+                int p = i-1; 
+                System.out.println("Sum found between indexes " + start 
+                        + " and " + p); 
+                return 1; 
+            } 
+              
+            // Add this element to curr_sum 
+            if (i < n) 
+            curr_sum = curr_sum + arr[i]; 
+              
+        } 
+  
+        System.out.println("No subarray found"); 
+        return 0; 
+    } 
+```
+
+### Subarray sum of size k negative
+
+```
+unordered_map<int, int> map; 
+  
+    // Maintains sum of elements so far 
+    int curr_sum = 0; 
+  
+    for (int i = 0; i < n; i++) 
+    { 
+        // add current element to curr_sum 
+        curr_sum = curr_sum + arr[i]; 
+  
+        // if curr_sum is equal to target sum 
+        // we found a subarray starting from index 0 
+        // and ending at index i 
+        if (curr_sum == sum) 
+        { 
+            cout << "Sum found between indexes "
+                 << 0 << " to " << i << endl; 
+            return; 
+        } 
+  
+        // If curr_sum - sum already exists in map 
+        // we have found a subarray with target sum 
+        if (map.find(curr_sum - sum) != map.end()) 
+        { 
+            cout << "Sum found between indexes "
+                 << map[curr_sum - sum] + 1 
+                 << " to " << i << endl; 
+            return; 
+        } 
+  
+        map[curr_sum] = i; 
+    } 
+  
+```
 
