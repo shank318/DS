@@ -571,6 +571,26 @@ lastOcc(Array a, size n, search_value s){
        
       return K[n][W]; 
     } 
+    
+    
+    //Recursion and dep
+    int rec(int idx, int weight) {
+	if(weight >= W){
+		return 0;
+	}
+	if(idx > N){
+		return 0;
+	}
+	if(dp[idx][weight]!=-1)return dp[idx][weight]
+	int ans = 0;
+	
+	ans = max(ans, rec(idx+1, weight));
+	if(weight+w[idx] <= W){
+		ans = max(ans, value[idx] + rec(idx+1, weight+w[idx]));	
+	}
+	
+	return dp[idx][weight] = ans;
+}
 ```
 
 ## Reverse a string
@@ -690,6 +710,29 @@ public static int dynamic(int[] v, int amount) {
 		int[] v = { 1, 2, 3 };
 		System.out.println("By Dynamic Programming " + dynamic(v, amount));
 	}
+	
+	//Recursion
+	int rec(int idx, int sum) {
+	if(sum > SUM){
+		return 0;
+	}
+	if(sum == SUM){
+		return 1;
+	}
+	if(idx > N){
+		return 0;
+	}
+	
+	if(dp[idx][sum]!=-1)return dp[idx][sum];
+	
+	int ans = 0;
+	
+	ans = rec(idx+1,sum);
+	ans = rec(idx, sum + S[idx]) + ans;
+	
+	return dp[idx][sum] = ans;
+	
+}
 
 }
 ```
